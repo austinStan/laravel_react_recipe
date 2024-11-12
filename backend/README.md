@@ -38,9 +38,7 @@ Before running the project locally, you need to have the following installed:
 
    php artisan migrate
 
-   php artisan serve
-
-```
+   php artisan serve```
 
 
 
