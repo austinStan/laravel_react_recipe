@@ -3,7 +3,6 @@
 
 ### **Sales Assistant Backend README**
 
-```markdown
 # Sales Assistant Backend
 
 This is the backend for the AI Sales Assistant platform, built with Laravel. It provides the necessary API to interact with the frontend, manage leads, and handle follow-ups.
@@ -40,7 +39,7 @@ Before running the project locally, you need to have the following installed:
    php artisan migrate
 
    php artisan serve
-   
+
 ```
 
 
