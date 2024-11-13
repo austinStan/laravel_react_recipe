@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import Settings from "./pages/Settings";
+import Container from "./pages/Container";
+import Header from "./pages/Header";
 
-class App extends Component {
-  render() {
-    return <h1>Hello World</h1>;
-  }
-}
+const App = () => {
+  return (
+    <React.Fragment>
+      <Settings />
+      <Header />
+      <Container />
+    </React.Fragment>
+  );
+};
 
 export default App;
