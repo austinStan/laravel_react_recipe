@@ -2,9 +2,10 @@ import React from "react";
 
 const Sidebar = () => {
   const navItems = [
-    { id: 1, icon: "#house-fill", label: "Dashboard", href: "/" },
-    { id: 2, icon: "#people", label: "Leads", href: "/leads" },
-    { id: 3, icon: "#graph-up", label: "Follow Ups", href: "/followup" },
+    { id: 1, icon: "#speedometer", label: "Dashboard", href: "/" },
+    { id: 2, icon: "#people", label: "Users", href: "/users" },
+    { id: 4, icon: "#leads", label: "Leads", href: "/leads" },
+    { id: 5, icon: "#followups", label: "Follow Ups", href: "/followup" },
   ];
 
   const secondNavItems = [

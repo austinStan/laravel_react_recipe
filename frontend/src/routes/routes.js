@@ -1,15 +1,14 @@
 import React from "react";
+import UserForm from "../components/Auth/Users/UserForm";
+import UsersList from "../components/Auth/Users/UsersList";
 
 const Dashboard = React.lazy(() => import("../components/Dashboard/Dashboard"));
 const LeadList = React.lazy(() => import("../components/Leads/LeadList"));
-const LeadsForm = React.lazy(() => import("../components/Leads/LeadsForm"));
 const FollowUpList = React.lazy(() =>
   import("../components/FollowUps/FollowUpList")
 );
 const Login = React.lazy(() => import("../components/Auth/Login/Login"));
-const Register = React.lazy(() =>
-  import("../components/Auth/Register/Register")
-);
+const LeadsForm = React.lazy(() => import("../components/Leads/LeadsForm"));
 
 export const standardRoutes = () => [
   {
@@ -23,13 +22,23 @@ export const standardRoutes = () => [
     exact: true,
   },
   {
+    path: "/followup",
+    component: <FollowUpList />,
+    exact: true,
+  },
+  {
+    path: "/users",
+    component: <UsersList />,
+    exact: true,
+  },
+  {
     path: "/leads/create",
     component: <LeadsForm />,
     exact: true,
   },
   {
-    path: "/followup",
-    component: <FollowUpList />,
+    path: "/users/create",
+    component: <UserForm />,
     exact: true,
   },
 ];
@@ -38,11 +47,6 @@ export const guestRoutes = () => [
   {
     path: "/login",
     component: <Login />,
-    exact: true,
-  },
-  {
-    path: "/register",
-    component: <Register />,
     exact: true,
   },
 ];
