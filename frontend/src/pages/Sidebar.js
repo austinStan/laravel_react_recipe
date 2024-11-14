@@ -8,8 +8,7 @@ const Sidebar = () => {
   ];
 
   const secondNavItems = [
-    { id: 1, icon: "#gear-wide-connected", label: "Settings", href: "#" },
-    { id: 2, icon: "#door-closed", label: "Sign out", href: "#" },
+    { id: 2, icon: "#door-closed", label: "Sign out", href: "/logout" },
   ];
 
   return (
