@@ -6,6 +6,10 @@ const LeadsForm = React.lazy(() => import("../components/Leads/LeadsForm"));
 const FollowUpList = React.lazy(() =>
   import("../components/FollowUps/FollowUpList")
 );
+const Login = React.lazy(() => import("../components/Auth/Login/Login"));
+const Register = React.lazy(() =>
+  import("../components/Auth/Register/Register")
+);
 
 export const standardRoutes = () => [
   {
@@ -30,4 +34,15 @@ export const standardRoutes = () => [
   },
 ];
 
-export const guestRoutes = () => [];
+export const guestRoutes = () => [
+  {
+    path: "/login",
+    component: <Login />,
+    exact: true,
+  },
+  {
+    path: "/register",
+    component: <Register />,
+    exact: true,
+  },
+];
