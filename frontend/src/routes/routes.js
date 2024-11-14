@@ -1,5 +1,6 @@
 import React from "react";
 import LeadList from "../components/Leads/LeadList";
+import FollowUpList from "../components/FollowUps/FollowUpList";
 
 const Dashboard = React.lazy(() => import("../components/Dashboard/Dashboard"));
 
@@ -15,8 +16,8 @@ export const standardRoutes = () => [
     exact: true,
   },
   {
-    path: "/",
-    component: <Fol />,
+    path: "/followup",
+    component: <FollowUpList />,
     exact: true,
   },
 ];
