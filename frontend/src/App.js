@@ -1,15 +1,12 @@
 import React from "react";
-import Settings from "./pages/Settings";
-import Container from "./pages/Container";
-import Header from "./pages/Header";
+import { BrowserRouter } from "react-router-dom";
+import MainContainer from "./pages/MainContainer";
 
 const App = () => {
   return (
-    <React.Fragment>
-      <Settings />
-      <Header />
-      <Container />
-    </React.Fragment>
+    <BrowserRouter>
+      <MainContainer />
+    </BrowserRouter>
   );
 };
 
