@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { REGISTER_API } from "../../../api/endpoints";
+import api from "../../../api/api";
 
 const UserForm = () => {
   const [data, setData] = useState({
@@ -20,7 +21,7 @@ const UserForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(REGISTER_API, data);
+      const response = await api.post(REGISTER_API, data);
       console.log("Response:", response.data);
     } catch (error) {
       console.error(
