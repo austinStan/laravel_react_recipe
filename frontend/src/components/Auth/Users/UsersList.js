@@ -43,7 +43,7 @@ function UsersList() {
       </Link>
 
       <Table
-        tableData={usersTableData(data || [])}
+        tableData={usersTableData(data?.users || [])}
         tableColumns={usersTableColumns}
       />
     </React.Fragment>

@@ -5,16 +5,16 @@ const useUsers = () => {
   const usersTableColumns = [
     { id: "name", header: "Name" },
     { id: "email", header: "Email", filter: {} },
-    { id: "phone_number", header: "Phone Number", filter: {} },
+    { id: "role", header: "Role", filter: {} },
     { id: "actions", header: "Actions" },
   ];
 
   const usersTableData = (data) => [
-    ...data.map((item) => {
+    ...data?.map((item) => {
       const row = {
         name: item.name,
         email: item.email,
-        phone_number: item.phone_number,
+        role: item.role,
         actions: (
           <Link className="mr-2" style={{ padding: 5, paddingBottom: 0 }}>
             View
