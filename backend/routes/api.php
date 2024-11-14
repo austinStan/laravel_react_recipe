@@ -16,14 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route for logging in
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/leads', [LeadsController::class, 'index']);
+    Route::post('/leads', [LeadsController::class, 'createLead']);
+
+    Route::get('/followups', [FollowUpsController::class, 'index']);
+    Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
+    Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
+    Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
-
-Route::get('/leads', [LeadsController::class, 'index']);
-Route::post('/leads', [LeadsController::class, 'createLead']);
-
-Route::get('/followups', [FollowUpsController::class, 'index']);
-Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
-Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
-Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
