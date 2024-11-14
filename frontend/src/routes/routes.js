@@ -1,6 +1,4 @@
 import React from "react";
-import UserForm from "../components/Auth/Users/UserForm";
-import UsersList from "../components/Auth/Users/UsersList";
 
 const Dashboard = React.lazy(() => import("../components/Dashboard/Dashboard"));
 const LeadList = React.lazy(() => import("../components/Leads/LeadList"));
@@ -9,6 +7,10 @@ const FollowUpList = React.lazy(() =>
 );
 const Login = React.lazy(() => import("../components/Auth/Login/Login"));
 const LeadsForm = React.lazy(() => import("../components/Leads/LeadsForm"));
+const UserForm = React.lazy(() => import("../components/Auth/Users/UserForm"));
+const UsersList = React.lazy(() =>
+  import("../components/Auth/Users/UsersList")
+);
 
 export const standardRoutes = () => [
   {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LEADS_API } from "../../api/endpoints";
+import api from "../../api/api";
 
 const LeadsForm = () => {
   const [data, setData] = useState({
@@ -30,7 +31,7 @@ const LeadsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(LEADS_API, data);
+      const response = await api.post(LEADS_API, data);
       console.log("Response:", response.data);
     } catch (error) {
       console.error(

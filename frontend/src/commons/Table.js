@@ -6,7 +6,7 @@ const Table = ({ tableColumns, tableData }) => {
       <table className="table table-striped table-sm">
         <thead>
           <tr>
-            {tableColumns?.map((row, i) => (
+            {tableColumns.map((row, i) => (
               <th key={i} scope="col">
                 {row.header}
               </th>
@@ -14,9 +14,9 @@ const Table = ({ tableColumns, tableData }) => {
           </tr>
         </thead>
         <tbody>
-          {tableData?.map((row, i) => (
+          {tableData.map((row, i) => (
             <tr key={i}>
-              {tableColumns?.map((item) => (
+              {tableColumns.map((item) => (
                 <td
                   style={{
                     verticalAlign: "middle",

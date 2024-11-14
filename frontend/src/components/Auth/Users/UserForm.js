@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { REGISTER_API } from "../../../api/endpoints";
 import api from "../../../api/api";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = () => {
   const [data, setData] = useState({
@@ -10,6 +11,8 @@ const UserForm = () => {
     password: "",
     email: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({
@@ -29,7 +32,9 @@ const UserForm = () => {
         error.response ? error.response.data : error.message
       );
     }
+    navigate("/users");
   };
+
   return (
     <React.Fragment>
       <div className="col-sm-12 mt-3">

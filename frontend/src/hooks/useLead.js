@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const useLead = () => {
   const leadsTableColumns = [
@@ -15,11 +16,9 @@ const useLead = () => {
         email: item.email,
         phone_number: item.phone_number,
         actions: (
-          <>
-            <Link class="mr-2" style={{ padding: 5, paddingBottom: 0 }}>
-              <FaEye />
-            </Link>
-          </>
+          <Link class="mr-2" style={{ padding: 5, paddingBottom: 0 }}>
+            View
+          </Link>
         ),
       };
       return row;
