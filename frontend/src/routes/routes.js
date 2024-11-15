@@ -5,11 +5,14 @@ const LeadList = React.lazy(() => import("../components/Leads/LeadList"));
 const FollowUpList = React.lazy(() =>
   import("../components/FollowUps/FollowUpList")
 );
+const UsersList = React.lazy(() =>
+  import("../components/Auth/Users/UsersList")
+);
 const Login = React.lazy(() => import("../components/Auth/Login/Login"));
 const LeadsForm = React.lazy(() => import("../components/Leads/LeadsForm"));
 const UserForm = React.lazy(() => import("../components/Auth/Users/UserForm"));
-const UsersList = React.lazy(() =>
-  import("../components/Auth/Users/UsersList")
+const FollowUpForm = React.lazy(() =>
+  import("../components/FollowUps/FollowUpForm")
 );
 
 export const standardRoutes = () => [
@@ -41,6 +44,11 @@ export const standardRoutes = () => [
   {
     path: "/users/create",
     component: <UserForm />,
+    exact: true,
+  },
+  {
+    path: "/followup/create",
+    component: <FollowUpForm />,
     exact: true,
   },
 ];
