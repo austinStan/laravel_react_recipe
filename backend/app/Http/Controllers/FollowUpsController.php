@@ -18,9 +18,9 @@ class FollowUpsController extends Controller
         return response()->json($followup, 201);
     }
 
-    public function show($id)
+    public function showFollowUp($id)
     {
-        return FollowUp::findOrFail($id);
+        return FollowUp::with("lead")->findOrFail($id);
     }
 
     public function updateFollowUpStatus(Request $request, $id)

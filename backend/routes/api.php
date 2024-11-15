@@ -18,23 +18,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route for logging in
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/register', [AuthController::class, 'index']);
-Route::post('/leads', [LeadsController::class, 'createLead']);
-Route::get('/leads', [LeadsController::class, 'index']);
-Route::get('/followups', [FollowUpsController::class, 'index']);
-Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
 
-Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
-Route::patch('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Laravel\Passport\Http\Controllers\TransientTokenController;
+
+Route::post('/oauth/token', [AccessTokenController::class, 'issueToken'])
+    ->middleware('throttle');
+Route::post('/oauth/token/refresh', [TransientTokenController::class, 'refresh'])
+    ->middleware('throttle');
+
+Route::post('/login', [AuthController::class, 'login'])->name("login");
+
 
 Route::middleware('auth:api')->group(function () {
+    Route::get('/register', [AuthController::class, 'index']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/leads', [LeadsController::class, 'createLead']);
+    Route::get('/leads', [LeadsController::class, 'index']);
+    Route::get('/followups', [FollowUpsController::class, 'index']);
+    Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
 
-
-
-
-
+    Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
+    Route::patch('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
 
 
 

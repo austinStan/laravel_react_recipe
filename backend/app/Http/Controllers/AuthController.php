@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+
 
 class AuthController extends Controller
 {
@@ -20,23 +20,25 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
         // Validate the request data
         $validated = $request->validate([
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
         // Check if the credentials are correct
         $user = User::where('email', $validated['email'])->first();
 
+
         if (!$user || !Hash::check($validated['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+            return response()->json([
+                'error' => 'Login credentials are invalid',
+            ], 401);
         }
 
         // Generate access token
-        $token = $user->createToken('recipe')->accessToken;
+        $token = $user->createToken('Personal Access Client')->accessToken;
 
         return response()->json([
             'message' => 'Login successful',
@@ -67,7 +69,7 @@ class AuthController extends Controller
         ]);
 
         // Generate a token for the user
-        $token = $user->createToken('Personal Access Token')->accessToken;
+        $token = $user->createToken('Personal Access Client')->accessToken;
 
         return response()->json([
             'message' => 'User registered successfully',
