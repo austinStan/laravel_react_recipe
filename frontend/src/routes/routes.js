@@ -14,6 +14,9 @@ const UserForm = React.lazy(() => import("../components/Auth/Users/UserForm"));
 const FollowUpForm = React.lazy(() =>
   import("../components/FollowUps/FollowUpForm")
 );
+const FollowUpDetails = React.lazy(() =>
+  import("../components/FollowUps/FollowUpDetails")
+);
 
 export const standardRoutes = () => [
   {
@@ -49,6 +52,11 @@ export const standardRoutes = () => [
   {
     path: "/followup/create",
     component: <FollowUpForm />,
+    exact: true,
+  },
+  {
+    path: "/followup/view/:id",
+    component: <FollowUpDetails />,
     exact: true,
   },
 ];

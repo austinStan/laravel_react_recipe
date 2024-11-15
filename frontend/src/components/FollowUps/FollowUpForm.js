@@ -7,6 +7,7 @@ import api from "../../api/api";
 const FollowUpForm = () => {
   const navigate = useNavigate();
   const [leads, setLeads] = useState([]); // State to hold the fetched data
+  const [followUp, setFollowUp] = useState([]); //
   const [loading, setLoading] = useState(true); // State to handle loading status
   const [error, setError] = useState(false); // State to handle
   const [data, setData] = useState({
@@ -42,6 +43,7 @@ const FollowUpForm = () => {
       try {
         // Make the API request using Axios
         const response = await api.get(LEADS_API);
+
         setLeads(response.data); // Update state with fetched data
         setLoading(false); // Stop the loading spinner
       } catch (error) {

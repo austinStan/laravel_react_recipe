@@ -14,11 +14,29 @@ const useFollowUp = () => {
       const row = {
         lead: item.lead?.name,
         scheduled_at: item.scheduled_at,
-        status: item.status,
+        status: (
+          <span
+            class={`badge bg-${
+              item?.status === "Pending"
+                ? "secondary"
+                : item?.status === "Missed"
+                ? "danger"
+                : "success"
+            }`}
+          >
+            {item?.status}{" "}
+          </span>
+        ),
         actions: (
-          <Link class="mr-2" style={{ padding: 5, paddingBottom: 0 }}>
-            View
-          </Link>
+          <React.Fragment>
+            <Link
+              to={`/followup/view/${item?.id}`}
+              class="mr-2"
+              style={{ padding: 5, paddingBottom: 0 }}
+            >
+              View
+            </Link>
+          </React.Fragment>
         ),
       };
       return row;
