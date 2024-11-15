@@ -14,8 +14,8 @@ class FollowUpsController extends Controller
 
     public function scheduleFollowUp(Request $request)
     {
-        $lead = FollowUp::create($request->all());
-        return response()->json($lead, 201);
+        $followup = FollowUp::create($request->all());
+        return response()->json($followup, 201);
     }
 
     public function show($id)
@@ -25,8 +25,8 @@ class FollowUpsController extends Controller
 
     public function updateFollowUpStatus(Request $request, $id)
     {
-        $lead = FollowUp::findOrFail($id);
-        $lead->update($request->all());
-        return response()->json($lead, 200);
+        $followup = FollowUp::findOrFail($id);
+        $followup->update($request->all());
+        return response()->json($followup, 200);
     }
 }

@@ -27,7 +27,7 @@ Route::get('/followups', [FollowUpsController::class, 'index']);
 Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
 
 Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
-Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
+Route::patch('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
 
 Route::middleware('auth:api')->group(function () {
 
