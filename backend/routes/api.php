@@ -21,15 +21,19 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/register', [AuthController::class, 'index']);
+Route::post('/leads', [LeadsController::class, 'createLead']);
+Route::get('/leads', [LeadsController::class, 'index']);
+Route::get('/followups', [FollowUpsController::class, 'index']);
+Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/leads', [LeadsController::class, 'index']);
-    Route::post('/leads', [LeadsController::class, 'createLead']);
 
 
 
-    Route::get('/followups', [FollowUpsController::class, 'index']);
-    Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
+
+
+
+
     Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
     Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
 
