@@ -9,7 +9,7 @@ class FollowUpsController extends Controller
 {
     public function index()
     {
-        return FollowUp::all();
+        return FollowUp::with("lead")->get();
     }
 
     public function scheduleFollowUp(Request $request)
