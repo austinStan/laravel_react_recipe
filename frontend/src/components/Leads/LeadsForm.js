@@ -1,25 +1,16 @@
 import React, { useState } from "react";
 import { LEADS_API } from "../../api/endpoints";
 import api from "../../api/api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const LeadsForm = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
-    phone_number: "",
+    phone: "",
     email: "",
   });
-  //   const [message, setMessage] = useState("");
-
-  //   const handlePost = async () => {
-  //     try {
-  //       const response = await axios.post(LEADS_API, data);
-  //       setMessage(`Data posted successfully with ID: ${response.data.id}`);
-  //       //   fetchData(); // Refresh data after posting
-  //     } catch (error) {
-  //       console.error("Error posting data:", error);
-  //       setMessage("Failed to post data");
-  //     }
-  //   };
 
   const handleChange = (e) => {
     setData({
@@ -32,12 +23,15 @@ const LeadsForm = () => {
     e.preventDefault();
     try {
       const response = await api.post(LEADS_API, data);
-      console.log("Response:", response.data);
+      toast.success("Successfully registered");
+      navigate("/leads");
     } catch (error) {
       console.error(
         "Error:",
         error.response ? error.response.data : error.message
       );
+      toast.error(error.message);
+      navigate("/leads/create");
     }
   };
 
@@ -69,9 +63,9 @@ const LeadsForm = () => {
             <input
               type="text"
               className="form-control"
-              id="phone_number"
-              name="phone_number"
-              value={data.phone_number}
+              id="phone"
+              name="phone"
+              value={data.phone}
               onChange={handleChange}
               required
             />

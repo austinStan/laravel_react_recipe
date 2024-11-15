@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { REGISTER_API } from "../../../api/endpoints";
 import api from "../../../api/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserForm = () => {
   const [data, setData] = useState({
@@ -26,13 +27,16 @@ const UserForm = () => {
     try {
       const response = await api.post(REGISTER_API, data);
       console.log("Response:", response.data);
+      toast.success("Successfully registered");
+      navigate("/users");
     } catch (error) {
       console.error(
         "Error:",
         error.response ? error.response.data : error.message
       );
+      toast.error(error.message);
+      navigate("/users/create");
     }
-    navigate("/users");
   };
 
   return (

@@ -5,7 +5,7 @@ const useLead = () => {
   const leadsTableColumns = [
     { id: "name", header: "Name" },
     { id: "email", header: "Email", filter: {} },
-    { id: "phone_number", header: "Phone Number", filter: {} },
+    { id: "phone", header: "Phone Number", filter: {} },
     { id: "actions", header: "Actions" },
   ];
 
@@ -14,7 +14,7 @@ const useLead = () => {
       const row = {
         name: item.name,
         email: item.email,
-        phone_number: item.phone_number,
+        phone: item.phone,
         actions: (
           <Link class="mr-2" style={{ padding: 5, paddingBottom: 0 }}>
             View
