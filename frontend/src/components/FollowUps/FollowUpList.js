@@ -43,7 +43,7 @@ function FollowUpList() {
       </Link>
 
       <Table
-        tableData={followUpTableData(data?.users || [])}
+        tableData={followUpTableData(data || [])}
         tableColumns={followUpTableColumns}
       />
     </React.Fragment>

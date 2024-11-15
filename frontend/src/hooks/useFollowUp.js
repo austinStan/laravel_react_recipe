@@ -12,7 +12,7 @@ const useFollowUp = () => {
   const followUpTableData = (data) => [
     ...data.map((item) => {
       const row = {
-        lead: item.lead,
+        lead: item.lead?.name,
         scheduled_at: item.scheduled_at,
         status: item.status,
         actions: (
