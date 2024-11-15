@@ -14,4 +14,9 @@ class FollowUp extends Model
         'scheduled_at',
         "status",
     ];
+
+    public function lead()
+    {
+        return $this->belongsTo(Lead::class);
+    }
 }

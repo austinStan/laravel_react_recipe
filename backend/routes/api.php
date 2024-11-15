@@ -26,6 +26,9 @@ Route::get('/leads', [LeadsController::class, 'index']);
 Route::get('/followups', [FollowUpsController::class, 'index']);
 Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
 
+Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
+Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
+
 Route::middleware('auth:api')->group(function () {
 
 
@@ -34,8 +37,6 @@ Route::middleware('auth:api')->group(function () {
 
 
 
-    Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
-    Route::put('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

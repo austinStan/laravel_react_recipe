@@ -14,4 +14,9 @@ class Lead extends Model
         'email',
         "phone",
     ];
+
+    public function followup()
+    {
+        return $this->hasMany(FollowUp::class);
+    }
 }
