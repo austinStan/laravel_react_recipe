@@ -1,20 +1,40 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState } from "react";
+import api from "../api/api";
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+export const AuthProvider = ({ children }) => {
+  const [authData, setAuthData] = useState(null); // Store user and token data
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("token") !== null
+  );
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
-const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const login = async (credentials) => {
+    try {
+      const response = await api.post(
+        "http://localhost:8000/api/login",
+        credentials
+      );
+      setLoggedIn(true);
+      setAuthData(response.data); // Store the token and user details
+      setToken(localStorage.setItem("token", response.data.access));
+      return response.data;
+    } catch (error) {
+      console.error("Login failed", error);
+      throw error;
+    }
+  };
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  const logout = () => {
+    setAuthData(null);
+  };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ authData, login, logout, loggedIn, token }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+export const useAuth = () => React.useContext(AuthContext);

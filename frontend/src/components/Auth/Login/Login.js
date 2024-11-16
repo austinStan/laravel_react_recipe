@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/auth.css";
+import { useAuth } from "../../../contexts/authContext";
 
 const Login = () => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login({ email, password });
+      // Redirect to dashboard or another page
+    } catch (err) {
+      setError("Invalid login credentials");
+    }
+  };
   return (
     <main className="form-signin w-100 m-auto mt-5">
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1 className="h3 mb-3 fw-normal text-center">Login</h1>
 
         <div className="form-floating">
@@ -13,6 +27,8 @@ const Login = () => {
             className="form-control"
             id="floatingInput"
             placeholder="name@example.com"
+            name="name"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label for="floatingInput">Email address</label>
         </div>
@@ -20,7 +36,7 @@ const Login = () => {
           <input
             type="password"
             className="form-control"
-            id="floatingPassword"
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
           <label for="floatingPassword">Password</label>
@@ -41,9 +57,7 @@ const Login = () => {
         <button className="btn btn-primary w-100 py-2" type="submit">
           Sign in
         </button>
-        <p className="mt-5 mb-3 text-body-secondary">
-          &copy; 2017–2024 <a href="/register">Register</a>
-        </p>
+        <p className="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
       </form>
     </main>
   );

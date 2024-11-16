@@ -5,13 +5,16 @@ import { ToastContainer } from "react-toastify";
 import "./assets/css/index.css";
 
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./contexts/authContext";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ToastContainer />
-      <MainContainer />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ToastContainer />
+        <MainContainer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
