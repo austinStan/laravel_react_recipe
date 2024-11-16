@@ -6,11 +6,7 @@ import Container from "./Container";
 import { useAuth } from "../contexts/authContext";
 
 const MainContainer = () => {
-  const { authData } = useAuth();
-
-  console.log(authData);
-
-  const loggedIn = false;
+  const { loggedIn } = useAuth();
 
   if (loggedIn) {
     return (
