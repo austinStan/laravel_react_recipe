@@ -1,4 +1,5 @@
 import React from "react";
+import { LogoutRoute } from "../contexts/authContext";
 
 const Dashboard = React.lazy(() => import("../components/Dashboard/Dashboard"));
 const LeadList = React.lazy(() => import("../components/Leads/LeadList"));
@@ -57,6 +58,11 @@ export const standardRoutes = () => [
   {
     path: "/followup/view/:id",
     component: <FollowUpDetails />,
+    exact: true,
+  },
+  {
+    path: "/logout",
+    component: <LogoutRoute />,
     exact: true,
   },
 ];

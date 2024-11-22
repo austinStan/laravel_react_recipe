@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       );
       setLoggedIn(true);
       setAuthData(response.data); // Store the token and user details
-      setToken(localStorage.setItem("token", response.data.access));
+      setToken(localStorage.setItem("token", response.data.token));
       return response.data;
     } catch (error) {
       console.error("Login failed", error);
@@ -26,8 +26,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    // console.log("logout");
+    // await api.post("/logout"); // Call backend
     setAuthData(null);
+    localStorage.removeItem("token");
+    window.location = "/login";
+    setLoggedIn(false);
   };
 
   return (
@@ -38,3 +43,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => React.useContext(AuthContext);
+
+export const LogoutRoute = () => useAuth().logout();
