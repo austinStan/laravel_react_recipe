@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -27,11 +28,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    // console.log("logout");
-    // await api.post("/logout"); // Call backend
     setAuthData(null);
     localStorage.removeItem("token");
-    window.location = "/login";
+    const navigate = useNavigate();
+    navigate("/login");
     setLoggedIn(false);
   };
 
