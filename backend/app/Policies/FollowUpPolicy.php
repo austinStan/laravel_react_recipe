@@ -9,8 +9,8 @@ class FollowUpPolicy
 {
     public function updateFollowUpStatus(User $user)
     {
-        return $user->role === "Admin" || $user->role === "Sales Manager"
+        return in_array($user->role, ['Admin', 'Sales Manager'])
             ? Response::allow()
-            : Response::deny('You cannot update a follow up.contact administrator');
+            : Response::deny('You cannot update a follow-up. Contact the administrator.');
     }
 }
