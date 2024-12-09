@@ -51,7 +51,7 @@ const FollowUpDetails = () => {
         "Error:",
         error.response ? error.response.data : error.message
       );
-      toast.error(error.response.data?.message);
+      toast.error(error?.response?.data?.message);
 
       navigate(`/followup`);
     }

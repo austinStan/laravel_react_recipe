@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\FollowUp;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,10 +18,7 @@ class FollowUpStatusChanged
     /**
      * Create a new event instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(public FollowUp $followup) {}
 
     /**
      * Get the channels the event should broadcast on.

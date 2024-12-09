@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FollowUpStatusChanged;
 use App\Models\FollowUp;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ class FollowUpsController extends Controller
         $followup = FollowUp::findOrFail($id);
         $this->authorize('updateFollowUpStatus', $followup);
         $followup->update($request->all());
+        //dispatch an event when status changes
+
+        // Event::dispatch(new FollowUpStatusChanged($followup));
         return response()->json($followup, 200);
     }
 }

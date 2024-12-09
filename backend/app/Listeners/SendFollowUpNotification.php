@@ -21,6 +21,6 @@ class SendFollowUpNotification
      */
     public function handle(FollowUpStatusChanged $event): void
     {
-        //
+        dd($event);
     }
 }
