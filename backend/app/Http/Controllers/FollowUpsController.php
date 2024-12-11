@@ -34,6 +34,10 @@ class FollowUpsController extends Controller
         $followup->update($request->all());
         //dispatch an event when status changes
 
+        FollowUpStatusChanged::dispatch($followup);
+
+        // event(new FollowUpStatusChanged($followup));
+
         // Event::dispatch(new FollowUpStatusChanged($followup));
         return response()->json($followup, 200);
     }

@@ -18,7 +18,7 @@ class FollowUpStatusChanged
     /**
      * Create a new event instance.
      */
-    public function __construct(public FollowUp $followup) {}
+    public function __construct(public FollowUp $followUp,) {}
 
     /**
      * Get the channels the event should broadcast on.
