@@ -7,6 +7,7 @@ use App\Models\FollowUp;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FollowUpsController extends Controller
 {
@@ -33,6 +34,8 @@ class FollowUpsController extends Controller
         $this->authorize('updateFollowUpStatus', $followup);
         $followup->update($request->all());
         //dispatch an event when status changes
+
+        // FollowUpStatusChanged::dispatch($followup);
 
         FollowUpStatusChanged::dispatch($followup);
 

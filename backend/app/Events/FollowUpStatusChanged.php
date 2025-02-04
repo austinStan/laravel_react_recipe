@@ -10,15 +10,20 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class FollowUpStatusChanged
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $followUp;
     /**
      * Create a new event instance.
      */
-    public function __construct(public FollowUp $followUp,) {}
+    public function __construct(FollowUp $followUp)
+    {
+        $this->followUp = $followUp;
+    }
 
     /**
      * Get the channels the event should broadcast on.

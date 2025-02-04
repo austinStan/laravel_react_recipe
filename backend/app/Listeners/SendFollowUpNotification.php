@@ -7,11 +7,11 @@ use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendFollowUpNotification
+
+class SendFollowUpNotification implements ShouldQueue
 {
 
-
-
+    use InteractsWithQueue;
     /**
      * Create the event listener.
      */
@@ -22,13 +22,15 @@ class SendFollowUpNotification
      */
     public function handle(FollowUpStatusChanged $event)
     {
-
-        // $user = User::all();
         // dd($event);
-        return "test";
-
+        // Log::info('Follow up status updated:', [$status]);
+        // Send welcome email logic
+        // dd($event);
+        $followUp = $event->followUp;
+        $status =  $followUp->status;
+        // Now you have the status
+        \Log::info('Follow up status updated:', [$status]);
         // $this->status = $event->status;
-
         // $user->notify(new FollowUpStatusChanged());
     }
 }
