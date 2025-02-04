@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\FollowUpStatusChanged;
 use App\Models\User;
+use App\Notifications\FollowUpMissed;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -28,9 +29,11 @@ class SendFollowUpNotification implements ShouldQueue
         // dd($event);
         $followUp = $event->followUp;
         $status =  $followUp->status;
+
+        $user = User::find(1);
         // Now you have the status
-        \Log::info('Follow up status updated:', [$status]);
+        // \Log::info('Follow up status updated:', [$status]);
         // $this->status = $event->status;
-        // $user->notify(new FollowUpStatusChanged());
+        $user->notify(new FollowUpMissed($status));
     }
 }
