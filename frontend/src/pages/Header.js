@@ -56,6 +56,9 @@ const Header = () => {
           aria-label="Search"
         />
       </div>
+      <div style={{ color: "white" }}>
+        <i class="bi bi-bell-fill"></i>
+      </div>
     </header>
   );
 };

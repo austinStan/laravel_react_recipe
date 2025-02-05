@@ -28,7 +28,7 @@ class FollowUpMissed extends Notification
      */
     public function via(object $notifiable): array
     {
-        \Log::info('notifiable instance:', ['data' => $notifiable]);
+        \Log::info('notifiable instance:', ['data' => $notifiable->name]);
         return ['database'];
     }
 
@@ -56,10 +56,9 @@ class FollowUpMissed extends Notification
     }
     public function toDatabase(object $notifiable): array
     {
-        return [];
-        // return [
-        //     'message' => $this->data['message'],
-        //     'user_id' => $this->data['user_id'],
-        // ];
+
+        return [
+            'data' => $notifiable,
+        ];
     }
 }
