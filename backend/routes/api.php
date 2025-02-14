@@ -36,10 +36,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/leads', [LeadsController::class, 'createLead']);
     Route::get('/leads', [LeadsController::class, 'index']);
     Route::get('/followups', [FollowUpsController::class, 'index']);
+
     Route::post('/followups', [FollowUpsController::class, 'scheduleFollowUp']);
+    Route::get('/followups/notifications', [FollowUpsController::class, 'getMissedNotifications']);
+
 
     Route::get('/followups/{id}', [FollowUpsController::class, 'showFollowUp']);
     Route::patch('/followups/{id}/status', [FollowUpsController::class, 'updateFollowUpStatus']);
+
 
 
 

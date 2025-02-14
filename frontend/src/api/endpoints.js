@@ -5,3 +5,4 @@ const getEndpointUrl = (path) => {
 export const LEADS_API = getEndpointUrl("/leads/");
 export const REGISTER_API = getEndpointUrl("/register/");
 export const FOLLOW_UP_API = getEndpointUrl("/followups/");
+export const NOTIFICATIONS_API = getEndpointUrl("/followups/notifications");
