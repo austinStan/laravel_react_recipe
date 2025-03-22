@@ -12,6 +12,8 @@ const LeadsForm = () => {
     email: "",
   });
 
+  const [error, setError] = useState({});
+
   const handleChange = (e) => {
     setData({
       ...data,
@@ -23,14 +25,22 @@ const LeadsForm = () => {
     e.preventDefault();
     try {
       const response = await api.post(LEADS_API, data);
-      toast.success("Successfully registered");
-      navigate("/leads");
+      console.log(response);
+
+      if ([200, 201]?.includes(response.status)) {
+        toast.success("Successfully registered");
+        navigate("/leads");
+        setError({});
+      } else {
+        const message = response?.data?.message;
+        console.log(response?.data);
+        const allErrors = response?.data?.errors;
+        toast.error(message);
+        setError(allErrors);
+        navigate("/leads");
+      }
     } catch (error) {
-      console.error(
-        "Error:",
-        error.response ? error.response.data : error.message
-      );
-      toast.error(error.message);
+      toast.error("Failure to create a lead...");
       navigate("/leads/create");
     }
   };
@@ -53,6 +63,7 @@ const LeadsForm = () => {
               value={data.name}
               onChange={handleChange}
             />
+
             <div className="invalid-feedback">Valid name is required.</div>
           </div>
 
