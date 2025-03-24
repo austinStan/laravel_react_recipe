@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\FollowUpStatusChanged;
+use App\Events\MissedNotifications;
 use App\Models\FollowUp;
 use App\Models\Notification;
 use App\Models\User;
@@ -40,6 +41,8 @@ class FollowUpsController extends Controller
 
         FollowUpStatusChanged::dispatch($followup);
 
+
+
         return response()->json($followup, 200);
     }
 
@@ -58,5 +61,11 @@ class FollowUpsController extends Controller
 
         return response()->json(['data' => $notifications, "message" =>
         'User data retrieved successfully!']);
+    }
+
+    public function sendMessage(Request $request)
+    {
+        broadcast(new MissedNotifications($request->message))->toOthers();
+        return response()->json(['message' => 'Message sent']);
     }
 }

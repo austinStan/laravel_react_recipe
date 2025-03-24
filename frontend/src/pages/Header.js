@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/api";
 import { NOTIFICATIONS_API } from "../api/endpoints";
+import Pusher from "pusher-js";
 
 const navButtons = [
   {
@@ -21,10 +22,10 @@ const navButtons = [
 
 const Header = () => {
   const [notifications, setNotifications] = useState([]);
+  const [messages, setMessages] = useState([]);
   const fetchNotifications = async () => {
     try {
       const response = await api.get(NOTIFICATIONS_API);
-      console.log(response.data);
 
       setNotifications(response.data?.data);
     } catch (error) {
@@ -35,6 +36,35 @@ const Header = () => {
   useEffect(() => {
     fetchNotifications();
   }, []);
+
+  useEffect(() => {
+    const pusher = new Pusher("your_app_key", {
+      cluster: "mt1",
+      wsHost: "127.0.0.1",
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true,
+    });
+
+    const channel = pusher.subscribe("chat-channel");
+    channel.bind("new-message", (data) => {
+      setMessages((prev) => [...prev, data.message]);
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, []);
+
+  //   <div>
+  //   <h2>Chat Messages</h2>
+  //   {messages.map((msg, index) => (
+  //     <p key={index}>{msg}</p>
+  //   ))}
+  // </div>
+  // Open React frontend and send a message from Postman or Laravel API.
+  //php artisan serve php artisan websockets:serve
 
   return (
     <header

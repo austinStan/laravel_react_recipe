@@ -12,9 +12,13 @@ const LeadsForm = () => {
     email: "",
   });
 
-  const [error, setError] = useState({});
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
+    setErrors({
+      ...errors,
+      [e.target.name]: "",
+    });
     setData({
       ...data,
       [e.target.name]: e.target.value,
@@ -25,25 +29,19 @@ const LeadsForm = () => {
     e.preventDefault();
     try {
       const response = await api.post(LEADS_API, data);
-      console.log(response);
-
-      if ([200, 201]?.includes(response.status)) {
+      if (response.status === 201) {
         toast.success("Successfully registered");
         navigate("/leads");
-        setError({});
-      } else {
-        const message = response?.data?.message;
-        console.log(response?.data);
-        const allErrors = response?.data?.errors;
-        toast.error(message);
-        setError(allErrors);
-        navigate("/leads");
+        setErrors({});
       }
     } catch (error) {
+      setErrors(error?.response?.data?.errors);
       toast.error("Failure to create a lead...");
       navigate("/leads/create");
     }
   };
+
+  console.log(errors);
 
   return (
     <div className="col-sm-12 mt-3">
@@ -64,7 +62,9 @@ const LeadsForm = () => {
               onChange={handleChange}
             />
 
-            <div className="invalid-feedback">Valid name is required.</div>
+            <span className="text-danger">
+              {errors.hasOwnProperty("name") ? errors?.name[0] : ""}
+            </span>
           </div>
 
           <div className="col-sm-6">
@@ -80,9 +80,9 @@ const LeadsForm = () => {
               onChange={handleChange}
               required
             />
-            <div className="invalid-feedback">
-              Valid phone number is required.
-            </div>
+            <span className="text-danger">
+              {errors.hasOwnProperty("phone") ? errors?.phone[0] : ""}
+            </span>
           </div>
 
           <div className="col-12">
@@ -97,9 +97,9 @@ const LeadsForm = () => {
               value={data.email}
               onChange={handleChange}
             />
-            <div className="invalid-feedback">
-              Please enter a valid email address..
-            </div>
+            <span className="text-danger">
+              {errors.hasOwnProperty("email") ? errors?.email[0] : ""}
+            </span>
           </div>
         </div>
 
