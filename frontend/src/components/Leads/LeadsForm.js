@@ -41,8 +41,6 @@ const LeadsForm = () => {
     }
   };
 
-  console.log(errors);
-
   return (
     <div className="col-sm-12 mt-3">
       <h4 className="mb-3">Create Lead</h4>

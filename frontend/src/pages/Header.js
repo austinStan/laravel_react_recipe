@@ -37,17 +37,18 @@ const Header = () => {
     fetchNotifications();
   }, []);
 
-  useEffect(() => {
-    const pusher = new Pusher("your_app_key", {
-      cluster: "mt1",
+  useEffect(async () => {
+    const pusher = new Pusher("f4733225bebe2dd77e68", {
+      cluster: "ap2",
       wsHost: "127.0.0.1",
       wsPort: 6001,
       forceTLS: false,
       disableStats: true,
     });
 
-    const channel = pusher.subscribe("chat-channel");
-    channel.bind("new-message", (data) => {
+    const channel = await pusher.subscribe("notifications");
+    channel.bind("new.notification", (data) => {
+      console.log(data);
       setMessages((prev) => [...prev, data.message]);
     });
 
@@ -56,6 +57,8 @@ const Header = () => {
       channel.unsubscribe();
     };
   }, []);
+
+  console.log(messages);
 
   //   <div>
   //   <h2>Chat Messages</h2>

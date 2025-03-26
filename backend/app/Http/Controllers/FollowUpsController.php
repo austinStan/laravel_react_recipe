@@ -41,8 +41,6 @@ class FollowUpsController extends Controller
 
         FollowUpStatusChanged::dispatch($followup);
 
-
-
         return response()->json($followup, 200);
     }
 
